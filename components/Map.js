@@ -3,7 +3,7 @@
 import React from 'react';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
-const apiKey = 'AIzaSyB0JVSJZnON4cflS83KpNDum6PzQvBL35c';
+const apiKey = '';
 
 const containerStyle = {
   width: '400px',
