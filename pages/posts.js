@@ -17,7 +17,7 @@ export default function Posts() {
 
   return (
     <div>
-      <h1>Posts</h1>
+      <h1>Feed</h1>
       <div>
         {posts.map((post) => (
           <PostCard key={post.id} postObj={post} onUpdate={getAllPosts} />
