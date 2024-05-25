@@ -24,6 +24,18 @@ const getSinglePost = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getSinglePostByPostId = (postId) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/posts/details/${postId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
 const createPost = (post) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/posts`, {
     method: 'POST',
@@ -61,6 +73,19 @@ const deletePost = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getPostsByCollectionId = (collectionId) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/collections/posts/${collectionId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
+
 export {
-  getPosts, getSinglePost, createPost, updatePost, deletePost,
+  getPosts, getSinglePost, createPost, updatePost, deletePost, getSinglePostByPostId,
+  getPostsByCollectionId,
 };

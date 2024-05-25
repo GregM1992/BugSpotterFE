@@ -30,7 +30,7 @@ export default function NavBar() {
             <Link passHref href="/posts">
               <Nav.Link>Feed</Nav.Link>
             </Link>
-            <Link passHref href="/delete-me">
+            <Link passHref href="/collections">
               <Nav.Link>Collections</Nav.Link>
             </Link>
             <Button variant="danger" onClick={signOut}>
