@@ -20,8 +20,9 @@ export default function Posts() {
       <h1>Feed</h1>
       <div>
         {posts.map((post) => (
-          <PostCard key={post.id} postObj={post} onUpdate={getAllPosts} />
+          <PostCard key={post.id} postObj={post} onUpdate={getAllPosts} location="feed" />
         ))}
+
       </div>
     </div>
 

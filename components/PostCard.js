@@ -2,15 +2,21 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 import { deletePost } from '../api/postData';
 
-function PostCard({ postObj, onUpdate }) {
+function PostCard({ postObj, onUpdate, location }) {
+  const router = useRouter();
   const deleteThisPost = () => {
     if (window.confirm('Delete this post?')) {
       deletePost(postObj.id).then(() => {
         onUpdate();
       });
     }
+  };
+
+  const viewDetails = () => {
+    router.push(`/post/${postObj.id}`);
   };
 
   return (
@@ -21,7 +27,7 @@ function PostCard({ postObj, onUpdate }) {
         <Card.Text>
           {postObj.description}
         </Card.Text>
-        {postObj.tags.map((tag) => (
+        {location === 'feed' ? postObj.tags.map((tag) => (
           <div
             style={
             {
@@ -36,8 +42,9 @@ function PostCard({ postObj, onUpdate }) {
             key={tag.id}
           >{tag.tagType}
           </div>
-        ))}
+        )) : <div />}
       </Card.Body>
+      <Button variant="primary" onClick={viewDetails}>View</Button>
       <Button variant="danger" onClick={deleteThisPost}>Delete</Button>
     </Card>
   );
@@ -60,6 +67,7 @@ PostCard.propTypes = {
       }),
     ),
   }).isRequired,
+  location: PropTypes.string.isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
 
