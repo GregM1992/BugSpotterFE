@@ -21,6 +21,9 @@ export default function CollectionDetails() {
       setCollection(data);
     });
   };
+  const pushToPostForm = () => {
+    router.push('/post/new');
+  };
 
   useEffect(() => {
     getPosts();
@@ -32,7 +35,7 @@ export default function CollectionDetails() {
   return (
     <div>
       <h1>{collection.name}</h1>
-      <Button>Add Post</Button>
+      <Button onClick={pushToPostForm}>Add Post</Button>
       {posts.length === 0 ? <p>There are no posts yet</p> : (
         <div>
           {posts.map((post) => (
