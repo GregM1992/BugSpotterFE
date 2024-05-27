@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { Button } from 'react-bootstrap';
 import { getPostsByCollectionId } from '../../api/postData';
 import { getSingleCollection } from '../../api/collectionData';
 import PostCard from '../../components/PostCard';
@@ -24,16 +25,21 @@ export default function CollectionDetails() {
   useEffect(() => {
     getPosts();
     getCollection();
+    console.warn(posts);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   return (
     <div>
       <h1>{collection.name}</h1>
-      <div>
-        {posts.map((post) => (
-          <PostCard key={post.id} postObj={post} onUpdate={getPosts} location="collectionDetails" />
-        ))}
-      </div>
+      <Button>Add Post</Button>
+      {posts.length === 0 ? <p>There are no posts yet</p> : (
+        <div>
+          {posts.map((post) => (
+            <PostCard key={post.id} postObj={post} onUpdate={getPosts} location="collectionDetails" />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

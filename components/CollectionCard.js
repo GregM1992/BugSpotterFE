@@ -15,14 +15,14 @@ function CollectionCard({ collectionObj, onUpdate }) {
     }
   };
   const viewPosts = () => { router.push(`/collection/${collectionObj.id}`); };
-  const editPost = () => { router.push('/collection/new'); };
+  const editPost = () => { router.push(`/collection/edit/${collectionObj.id}`); };
 
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Body>
         <Card.Title>{collectionObj.name}</Card.Title>
         <Card.Text>
-          Posts in this collection:{collectionObj.numberOfPosts}
+          Posts in this collection: {collectionObj.numberOfPosts}
         </Card.Text>
         <Button variant="primary" onClick={viewPosts}>View Posts</Button>
         <Button variant="primary" onClick={editPost}>Edit</Button>
