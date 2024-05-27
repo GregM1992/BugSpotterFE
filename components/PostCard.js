@@ -44,8 +44,12 @@ function PostCard({ postObj, onUpdate, location }) {
           </div>
         )) : <div />}
       </Card.Body>
-      <Button variant="primary" onClick={viewDetails}>View</Button>
-      <Button variant="danger" onClick={deleteThisPost}>Delete</Button>
+      {location !== 'details' ? (
+        <Button variant="primary" onClick={viewDetails}>View</Button>
+      ) : <><div /></>}
+      {location !== 'details' ? (
+        <Button variant="danger" onClick={deleteThisPost}>Delete</Button>
+      ) : <><div /></>}
     </Card>
   );
 }
