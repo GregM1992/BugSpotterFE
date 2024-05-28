@@ -1,12 +1,14 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
-import React from 'react';
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import React, { useEffect, useState, useCallback } from 'react';
+import PropTypes from 'prop-types';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
+import { useRouter } from 'next/router';
 
 const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
 const containerStyle = {
-  width: '400px',
+  width: '100%',
   height: '400px',
 };
 
@@ -15,36 +17,82 @@ const center = {
   lng: -86.7143516,
 };
 
-export default function Map() {
+function Map({ onLocationSelect, posts }) {
   const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
+    id: process.env.NEXT_PUBLIC_GOOGLE_MAP_ID,
     googleMapsApiKey: apiKey,
   });
 
-  const [map, setMap] = React.useState(null);
+  const [map, setMap] = useState(null);
+  const [selectedLocation, setSelectedLocation] = useState(center);
+  const router = useRouter();
 
-  const onLoad = React.useCallback((map) => {
-    // This is just an example of getting and using the map instance!!! don't just blindly copy!
-    const bounds = new window.google.maps.LatLngBounds(center);
-    map.fitBounds(bounds);
-
+  const onLoad = useCallback((map) => {
     setMap(map);
   }, []);
 
-  const onUnmount = React.useCallback((map) => {
+  const onUnmount = useCallback((map) => {
     setMap(null);
   }, []);
+
+  const handleMapClick = (event) => {
+    const lat = event.latLng.lat();
+    const lng = event.latLng.lng();
+    const location = { lat, lng };
+    setSelectedLocation(location);
+    if (onLocationSelect) {
+      onLocationSelect(location);
+    }
+  };
+  const handleMarkerClick = (postId) => {
+    router.push(`/post/${postId}`);
+  };
 
   return isLoaded ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
-      center={center}
+      center={selectedLocation}
       zoom={10}
       onLoad={onLoad}
       onUnmount={onUnmount}
+      onClick={onLocationSelect ? handleMapClick : undefined}
     >
-      { /* Child components, such as markers, info windows, etc. */ }
-      <></>
+      {onLocationSelect && (
+        <Marker position={selectedLocation} />
+      )}
+      {posts && posts.map((post) => (
+        <Marker
+          key={post.id}
+          position={{ lat: post.latitude, lng: post.longitude }}
+          title={post.description}
+          onClick={() => handleMarkerClick(post.id)}
+          icon={{
+            url: post.image,
+            scaledSize: new window.google.maps.Size(50, 50),
+          }}
+
+        />
+      ))}
     </GoogleMap>
   ) : <></>;
 }
+
+Map.propTypes = {
+  onLocationSelect: PropTypes.func,
+  posts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+      image: PropTypes.string,
+      description: PropTypes.string,
+    }),
+  ),
+};
+
+Map.defaultProps = {
+  onLocationSelect: null,
+  posts: null,
+};
+
+export default Map;
