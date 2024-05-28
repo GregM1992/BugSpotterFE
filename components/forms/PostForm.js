@@ -7,6 +7,7 @@ import { useAuth } from '../../utils/context/authContext';
 import { createPost, updatePost } from '../../api/postData';
 import { getAllTags, addTagToPost } from '../../api/tagData';
 import { getCollectionsByUserId } from '../../api/collectionData';
+import Map from '../Map';
 
 const initialState = {
   userId: 0,
@@ -47,6 +48,14 @@ function PostForm({ postObj }) {
         userId: user.id,
       }));
     }
+  };
+
+  const handleLocationSelect = (location) => {
+    setFormInput((prevState) => ({
+      ...prevState,
+      latitude: location.lat,
+      longitude: location.lng,
+    }));
   };
 
   const getTagsForList = () => {
@@ -155,6 +164,10 @@ function PostForm({ postObj }) {
           }));
         }}
       />
+      <div>
+        <Map onLocationSelect={handleLocationSelect} />
+      </div>
+      <p>Selected Location: Latitude {formInput.latitude}, Longitude {formInput.longitude}</p>
       <Button variant="primary" type="submit" onClick={handleSubmit}>
         {postObj.id ? 'Update Post' : 'Create Post'}
       </Button>
