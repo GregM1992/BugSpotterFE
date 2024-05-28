@@ -3,10 +3,9 @@ import Form from 'react-bootstrap/Form';
 import { PropTypes } from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import { useRouter } from 'next/router';
-import { GoogleMap } from '@react-google-maps/api';
 import { useAuth } from '../../utils/context/authContext';
 import { createPost, updatePost } from '../../api/postData';
-import { getAllTags } from '../../api/tagData';
+import { getAllTags, addTagToPost } from '../../api/tagData';
 import { getCollectionsByUserId } from '../../api/collectionData';
 
 const initialState = {
@@ -19,32 +18,43 @@ const initialState = {
   favorite: false,
   tags: [],
 };
+
 function PostForm({ postObj }) {
   const [formInput, setFormInput] = useState({ ...initialState });
   const [tags, setTags] = useState([]);
-  const [collections, setCollections] = useState([{}]);
+  const [collections, setCollections] = useState([]);
   const router = useRouter();
-  const { id } = router.query;
   const { user } = useAuth();
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormInput({
-      ...formInput,
-      [name]: value,
-      userId: user.id,
-    });
+  const handleInputChange = (e, tagId) => {
+    const {
+      name, value, type, checked,
+    } = e.target;
+
+    if (type === 'checkbox') {
+      const selectedTags = checked
+        ? [...formInput.tags, tagId]
+        : formInput.tags.filter((id) => id !== tagId);
+      setFormInput((prevState) => ({
+        ...prevState,
+        tags: selectedTags,
+        userId: user.id,
+      }));
+    } else {
+      setFormInput((prevState) => ({
+        ...prevState,
+        [name]: value,
+        userId: user.id,
+      }));
+    }
   };
+
   const getTagsForList = () => {
-    getAllTags().then((data) => {
-      setTags(data);
-      console.warn(data);
-    });
+    getAllTags().then(setTags);
   };
+
   const getCollectionsForList = () => {
-    getCollectionsByUserId(user.id).then((data) => {
-      setCollections(data);
-    });
+    getCollectionsByUserId(user.id).then(setCollections);
   };
 
   const handleFileUpload = (e) => {
@@ -72,10 +82,20 @@ function PostForm({ postObj }) {
     e.preventDefault();
     if (postObj.id) {
       updatePost(postObj.id, formInput)
-        .then(() => router.push(`/post/${id}`));
-      setFormInput(initialState);
+        .then(() => {
+          setFormInput(initialState);
+          router.push(`/post/${postObj.id}`);
+        });
     } else {
-      createPost(formInput).then(() => router.push('/posts'));
+      createPost(formInput)
+        .then((response) => {
+          const tagPromises = formInput.tags.map((tagId) => addTagToPost(response.id, tagId));
+          return Promise.all(tagPromises).then(() => response);
+        })
+        .then((response) => {
+          setFormInput(initialState);
+          router.push(`/collection/${response.collectionId}`);
+        });
     }
   };
 
@@ -108,10 +128,10 @@ function PostForm({ postObj }) {
           key={tag.id}
           type="checkbox"
           label={tag.tagType}
-          onChange={(e) => handleInputChange(e, tag)}
+          checked={formInput.tags.includes(tag.id)}
+          onChange={(e) => handleInputChange(e, tag.id)}
         />
       ))}
-      <GoogleMap />
       <Form.Group className="mb-3" controlId="ControlInput1">
         <Form.Control
           type="text"
@@ -136,7 +156,7 @@ function PostForm({ postObj }) {
         }}
       />
       <Button variant="primary" type="submit" onClick={handleSubmit}>
-        Create Post
+        {postObj.id ? 'Update Post' : 'Create Post'}
       </Button>
     </Form>
   );
@@ -152,7 +172,7 @@ PostForm.propTypes = {
     longitude: PropTypes.number,
     description: PropTypes.string,
     favorite: PropTypes.bool,
-    tags: PropTypes.arrayOf(PropTypes.string),
+    tags: PropTypes.arrayOf(PropTypes.number),
   }),
 };
 
