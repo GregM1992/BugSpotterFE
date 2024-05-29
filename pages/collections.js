@@ -21,7 +21,7 @@ export default function Collections() {
 
   return (
     <div>
-      <h1>Collections</h1>
+      <h1>My Collections</h1>
       <Button href="/collection/new">Create New Collection</Button>
       <div>
         {collections.map((collection) => (
