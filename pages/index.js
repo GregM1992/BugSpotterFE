@@ -4,10 +4,12 @@ import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
 import Map from '../components/Map';
 import { getPosts } from '../api/postData';
+import RegisterForm from '../components/RegisterForm';
 
 function Home() {
   const { user } = useAuth();
   const [posts, setPosts] = useState([]);
+  const isUser = user?.id;
 
   const getAllPosts = () => {
     getPosts().then((data) => {
@@ -19,6 +21,12 @@ function Home() {
     getAllPosts();
   }, []);
 
+  if (!isUser) {
+    return (
+      <RegisterForm />
+    );
+  }
+
   return (
     <div
       className="text-center d-flex flex-column justify-content-center align-content-center"
@@ -29,8 +37,8 @@ function Home() {
         margin: '0 auto',
       }}
     >
-      <h1>Hello {user.fbUser.displayName}! </h1>
-      <p>Your Bio: {user.bio}</p>
+      <h1>Welcome {user.userName} to BugSpotter! </h1>
+      <p>Check out some of the posts around you!</p>
       <Map posts={posts} />
       <p>Click the button below to logout!</p>
       <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>

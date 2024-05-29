@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import { useRouter } from 'next/router';

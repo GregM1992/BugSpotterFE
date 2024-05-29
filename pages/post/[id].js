@@ -5,6 +5,7 @@ import { getSinglePostByPostId } from '../../api/postData';
 import CommentCard from '../../components/CommentCard';
 import PostCard from '../../components/PostCard';
 import TagCard from '../../components/TagCard';
+import CommentModalForm from '../../components/forms/CommentModalForm';
 
 export default function PostDetails() {
   const [post, setPost] = useState({ tags: [] });
@@ -41,6 +42,7 @@ export default function PostDetails() {
       {comments.map((comment) => (
         <CommentCard key={comment.id} commentObj={comment} onUpdate={getComments} />
       ))}
+      <CommentModalForm onUpdate={getComments} />
     </>
   );
 }

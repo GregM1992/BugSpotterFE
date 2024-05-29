@@ -24,8 +24,8 @@ const AuthProvider = (props) => {
   // an object/value = user is logged in
 
   const updateUser = useMemo(
-    () => (uid) => checkUser(uid).then((gamerInfo) => {
-      setUser({ fbUser: oAuthUser, ...gamerInfo });
+    () => (uid) => checkUser(uid).then((userBio) => {
+      setUser({ fbUser: oAuthUser, ...userBio });
     }),
     [oAuthUser],
   );
@@ -34,12 +34,12 @@ const AuthProvider = (props) => {
     firebase.auth().onAuthStateChanged((fbUser) => {
       if (fbUser) {
         setOAuthUser(fbUser);
-        checkUser(fbUser.uid).then((gamerInfo) => {
+        checkUser(fbUser.uid).then((userBio) => {
           let userObj = {};
-          if ('null' in gamerInfo) {
-            userObj = gamerInfo;
+          if (userBio && typeof userBio === 'object' && 'null' in userBio) {
+            userObj = { ...userBio, uid: fbUser.uid };
           } else {
-            userObj = { fbUser, uid: fbUser.uid, ...gamerInfo };
+            userObj = { ...userBio, uid: fbUser.uid };
           }
           setUser(userObj);
         });
@@ -47,7 +47,7 @@ const AuthProvider = (props) => {
         setOAuthUser(false);
         setUser(false);
       }
-    }); // creates a single global listener for auth state changed
+    });
   }, []);
 
   const value = useMemo(
@@ -56,6 +56,7 @@ const AuthProvider = (props) => {
       user,
       updateUser,
       userLoading: user === null || oAuthUser === null,
+      userEmail: oAuthUser?.email,
       // as long as user === null, will be true
       // As soon as the user value !== null, value will be false
     }),
