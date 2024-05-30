@@ -36,7 +36,6 @@ function CommentModalForm({ commentObj, onUpdate }) {
       [name]: value,
       userId: user.id,
       postId: id,
-      datePosted: new Date(),
     }));
   };
 
