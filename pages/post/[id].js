@@ -5,6 +5,7 @@ import { getSinglePostByPostId } from '../../api/postData';
 import CommentCard from '../../components/CommentCard';
 import PostCard from '../../components/PostCard';
 import TagCard from '../../components/TagCard';
+import Map from '../../components/Map';
 import CommentModalForm from '../../components/forms/CommentModalForm';
 
 export default function PostDetails() {
@@ -39,6 +40,7 @@ export default function PostDetails() {
       <div className="descriptionDiv">
         {post.content}
       </div>
+      <Map posts={[post]} />
       {comments.map((comment) => (
         <CommentCard key={comment.id} commentObj={comment} onUpdate={getComments} />
       ))}

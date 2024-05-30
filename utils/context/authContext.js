@@ -57,6 +57,7 @@ const AuthProvider = (props) => {
       updateUser,
       userLoading: user === null || oAuthUser === null,
       userEmail: oAuthUser?.email,
+      photoURL: oAuthUser?.photoURL,
       // as long as user === null, will be true
       // As soon as the user value !== null, value will be false
     }),
