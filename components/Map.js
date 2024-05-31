@@ -50,15 +50,21 @@ function Map({ onLocationSelect, posts }) {
 
   return isLoaded ? (
     <GoogleMap
+      mapContainerClassName="map-container"
       mapContainerStyle={containerStyle}
       center={selectedLocation}
       zoom={10}
       onLoad={onLoad}
       onUnmount={onUnmount}
       onClick={onLocationSelect ? handleMapClick : undefined}
+      options={{ disableDefaultUI: true, hover: false, selected: false }}
+      className="map"
     >
       {onLocationSelect && (
-        <Marker position={selectedLocation} />
+        <Marker
+          position={selectedLocation}
+          draggable
+        />
       )}
       {posts && posts.map((post) => (
         <Marker

@@ -29,19 +29,21 @@ function Home() {
 
   return (
     <div
-      className="text-center d-flex flex-column justify-content-center align-content-center"
+      className="text-center flex-column justify-content-center landingPageContainer"
       style={{
         height: '90vh',
         padding: '30px',
-        maxWidth: '400px',
+        maxWidth: '700px',
         margin: '0 auto',
       }}
     >
-      <h1>Welcome {user.userName} to BugSpotter! </h1>
-      <p>Check out some of the posts around you!</p>
+      <h1 className="landingPageHeader">Welcome</h1>
+      <h1 className="userName">{user.userName}</h1>
+      <h1 className="landingPageHeader">to BugSpotter!</h1>
+      <h4>Check out some of the posts around you!</h4>
       <Map posts={posts} />
-      <p>Click the button below to logout!</p>
-      <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
+      <h6 className="logOutText">Click the button below to logout!</h6>
+      <Button variant="outline-danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
         Sign Out
       </Button>
     </div>

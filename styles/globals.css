@@ -1,11 +1,20 @@
 @import 'bootstrap/dist/css/bootstrap.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+
 
 html,
 body {
+  color: #173309;
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family:  Montserrat, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-weight: 400;
+    background-image: url('../public/BugspotterBG.jpg');
+    background-size:100%; 
+    background-attachment: fixed;
 }
 
 a {
@@ -16,7 +25,130 @@ a {
 * {
   box-sizing: border-box;
 }
+.userName{
+  font-weight: bolder;
+}
+
+.navBarItems{
+margin: none;
+}
+.logo{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.navLinks{
+ margin-right: 50px !important;
+ font-size: large;
+}
+.map-container{
+  height: 400px;
+  width: 100%;
+  border-radius: 25px;
+  box-shadow: 1px 2px 5px 0px #000000;
+  margin-bottom: 30px;
+}
+.map :focus{
+  outline: none;
+}
+.homeLink{
+  margin-left: 50px;;
+}
+.landingPageHeader{
+  margin-top: none;
+  margin-bottom: 20px;
+}
+.logOutText{
+  margin-bottom: 20px;
+}
+.landingPageContainer{
+  padding-top: 0;
+}
+.profileCardTitle{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.profileCard{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 70px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.profileUserItems{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profileUserStats{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 20px;
+}
+.profileButtons{
+  display: flex;
+  flex-direction: column;
+  margin : auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  min-width: 200px;
+  padding: auto;
+}
+.singleProfileButton{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.feedContainer{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.postCardBody{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: none;
+  box-shadow: #173309 1px 2px 5px 0px;
+}
+.postDescription{
+ background-color: #6B895B !important;
+ padding: fit-content;
+ text-align: center;
+ color: #FAFFF1;
+}
+.tag{
+  background-color: #173309;
+  color: #FAFFF1;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+}
+.tagContainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.postCardButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 2px;
+  margin-bottom: 5px;
+  min-width: 79px;
+}
 
 body {
-  background-color: #88effd;
+  background-color: #FAFFF1;
 }

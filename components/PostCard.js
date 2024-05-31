@@ -20,18 +20,19 @@ function PostCard({ postObj, onUpdate, location }) {
   };
 
   return (
-    <Card style={{ width: '18rem' }}>
+    <Card className="postCardBody" style={{ width: '18rem' }}>
       <Card.Img variant="top" src={postObj.image} />
       <Card.Body>
         <Card.Title />
-        <Card.Text>
+        <Card.Text className="postDescription">
           {postObj.description}
         </Card.Text>
-        {location === 'feed' ? postObj.tags.map((tag) => (
-          <div
-            style={
+        <div className="tagContainer">
+          {location === 'feed' ? postObj.tags.map((tag) => (
+            <div
+              className="tag"
+              style={
             {
-              backgroundColor: 'lightgrey',
               padding: '5px',
               margin: '5px',
               borderRadius: '5px',
@@ -39,16 +40,17 @@ function PostCard({ postObj, onUpdate, location }) {
               display: 'inline-block',
             }
           }
-            key={tag.id}
-          >{tag.tagType}
-          </div>
-        )) : <div />}
+              key={tag.id}
+            >{tag.tagType}
+            </div>
+          )) : <div />}
+        </div>
       </Card.Body>
       {location !== 'details' ? (
-        <Button variant="primary" onClick={viewDetails}>View</Button>
+        <Button className="postCardButtons" variant="outline-secondary" onClick={viewDetails}>View</Button>
       ) : <><div /></>}
       {location !== 'details' ? (
-        <Button variant="danger" onClick={deleteThisPost}>Delete</Button>
+        <Button className="postCardButtons" variant="outline-secondary" onClick={deleteThisPost}>Delete</Button>
       ) : <><div /></>}
     </Card>
   );

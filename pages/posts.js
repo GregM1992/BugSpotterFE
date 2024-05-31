@@ -17,8 +17,15 @@ export default function Posts() {
 
   return (
     <div>
-      <h1>Feed</h1>
-      <div>
+      <h1 style={{
+        textAlign: 'center',
+        marginTop: '20px',
+        fontWeight: 'bold',
+
+      }}
+      >Feed
+      </h1>
+      <div className="feedContainer">
         {posts.map((post) => (
           <PostCard key={post.id} postObj={post} onUpdate={getAllPosts} location="feed" />
         ))}
