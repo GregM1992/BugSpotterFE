@@ -32,11 +32,13 @@ export default function PostDetails() {
   }, [post.id]);
 
   return (
-    <>
-      {post.tags.map((tag) => (
-        <TagCard key={tag.id} tagObj={tag} />
-      ))}
-      <PostCard key={post.id} postObj={post} onUpdate={getPost} location="details" />
+    <container className="singlePostContainer">
+      <div className="postTags">
+        {post.tags.map((tag) => (
+          <TagCard className="individualTagOnPost" key={tag.id} tagObj={tag} />
+        ))}
+      </div>
+      <PostCard className="singlePostCard" key={post.id} postObj={post} onUpdate={getPost} location="details" />
       <div className="descriptionDiv">
         {post.content}
       </div>
@@ -45,6 +47,6 @@ export default function PostDetails() {
         <CommentCard key={comment.id} commentObj={comment} onUpdate={getComments} />
       ))}
       <CommentModalForm onUpdate={getComments} />
-    </>
+    </container>
   );
 }

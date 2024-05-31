@@ -21,7 +21,6 @@ export default function Posts() {
         textAlign: 'center',
         marginTop: '20px',
         fontWeight: 'bold',
-
       }}
       >Feed
       </h1>

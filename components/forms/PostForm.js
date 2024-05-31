@@ -142,6 +142,7 @@ function PostForm({ postObj }) {
         />
       ))}
       <Form.Group className="mb-3" controlId="ControlInput1">
+        <Form.Label>Post Description</Form.Label>
         <Form.Control
           type="text"
           placeholder="Description"
@@ -150,6 +151,7 @@ function PostForm({ postObj }) {
           value={formInput.description}
         />
       </Form.Group>
+      <Form.Label>Favorite?</Form.Label>
       <Form.Check
         className="text-white mb-3"
         type="switch"

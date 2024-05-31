@@ -33,9 +33,9 @@ export default function CollectionDetails() {
   }, [id]);
 
   return (
-    <div>
+    <div className="collectionDiv">
       <h1>{collection.name}</h1>
-      <Button onClick={pushToPostForm}>Add Post</Button>
+      <Button variant="outline-secondary" onClick={pushToPostForm}>Add Post</Button>
       {posts.length === 0 ? <p>There are no posts yet</p> : (
         <div>
           {posts.map((post) => (

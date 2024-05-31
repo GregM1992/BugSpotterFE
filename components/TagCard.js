@@ -5,7 +5,7 @@ function TagCard({ tagObj }) {
   return (
     <div>
       <div>
-        <p>{tagObj.tagType}</p>
+        <p className="individualTagOnPost">{tagObj.tagType}</p>
       </div>
     </div>
   );
