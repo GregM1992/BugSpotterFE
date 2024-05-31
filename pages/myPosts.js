@@ -22,11 +22,11 @@ export default function Posts() {
   }, [user.id]);
 
   return (
-    <div>
-      <h1>My Posts</h1>
-      <div>
+    <div className="myPostsDiv">
+      <h1 className="myPostsTitle">My Posts</h1>
+      <div className="myPostsDiv">
         {posts.length === 0 ? <h2>No posts yet</h2> : null}
-        <Button onClick={() => router.push('/post/new')}>Create Post</Button>
+        <Button className="createPostButton" variant="outline-secondary" onClick={() => router.push('/post/new')}>Create Post</Button>
         {posts.map((post) => (
           <PostCard key={post.id} postObj={post} onUpdate={getAllPosts} location="feed" />
         ))}

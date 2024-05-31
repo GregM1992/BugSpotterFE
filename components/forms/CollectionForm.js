@@ -55,7 +55,7 @@ function CollectionForm({ collectionObj }) {
           value={formInput.name}
         />
       </Form.Group>
-      <Button variant="primary" type="submit" onClick={handleSubmit}>
+      <Button variant="outline-secondary" type="submit" onClick={handleSubmit}>
         Create Collection
       </Button>
     </Form>

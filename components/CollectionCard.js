@@ -18,15 +18,17 @@ function CollectionCard({ collectionObj, onUpdate }) {
   const editPost = () => { router.push(`/collection/edit/${collectionObj.id}`); };
 
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Body>
+    <Card className="collectionCard" style={{ width: '25rem', margin: '1px' }}>
+      <Card.Body className="collectionCardBody">
         <Card.Title>{collectionObj.name}</Card.Title>
         <Card.Text>
           Posts in this collection: {collectionObj.numberOfPosts}
         </Card.Text>
-        <Button variant="primary" onClick={viewPosts}>View Posts</Button>
-        <Button variant="primary" onClick={editPost}>Edit</Button>
-        <Button variant="danger" onClick={deleteThisCollection}>Delete</Button>
+        <div className="collectionButtonDiv">
+          <Button className="myCollectionCardButtons" variant="outline-secondary" onClick={viewPosts}>View Posts</Button>
+          <Button className="myCollectionCardButtons" variant="outline-secondary" onClick={editPost}>Edit</Button>
+          <Button className="myCollectionCardButtons" variant="outline-danger" onClick={deleteThisCollection}>Delete</Button>
+        </div>
       </Card.Body>
     </Card>
   );

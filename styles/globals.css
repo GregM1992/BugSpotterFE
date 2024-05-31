@@ -119,20 +119,24 @@ margin: none;
   margin-top: 20px;
   margin-bottom: 20px;
   border: none;
-  box-shadow: #173309 1px 2px 5px 0px;
+  box-shadow: #173309 2px 3px 5px 0px;
 }
 .postDescription{
  background-color: #6B895B !important;
- padding: fit-content;
+ padding: 5px;
  text-align: center;
  color: #FAFFF1;
+ border-radius: 7px;
+ max-width: 260px;
+ min-width: 260px;
+ margin-bottom: auto;
 }
 .tag{
   background-color: #173309;
   color: #FAFFF1;
   margin: 5px;
   padding: 5px;
-  border-radius: 5px;
+  border-radius: 7px;
 }
 .tagContainer{
   display: flex;
@@ -147,6 +151,121 @@ margin: none;
   margin-top: 2px;
   margin-bottom: 5px;
   min-width: 79px;
+  font-weight: 600;
+}
+.collectionDiv{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.singlePostContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin : auto;
+  max-width: 800px;
+}
+.singlePostCard{
+  align-items: start;
+}
+.postTags{
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+}
+.individualTagOnPost{
+  background-color: #173309;
+  color: #FAFFF1;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 7px;
+}
+.myPostsDiv{
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 800px;
+  justify-content: center;
+}
+.myPostsTitle{
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+.createPostButton{
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  max-width: fit-content;
+}
+.collectionButtonDiv{
+  display: flex;
+  flex-direction: row;
+}
+.myCollectionCardButtons{
+  display: flex;
+  font-weight: 600;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.collectionCardBody{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  border: none;
+  box-shadow: #173309 1px 2px 5px 0px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background-color: white;
+  margin-top: 25px;
+}
+.collectionCard{
+  border: none;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background-color: #FAFFF1 ;
+  
+}
+.myCollectionsHeader{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  font-weight: 700;
+}
+.collectionsDiv{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  max-width: 800px;
+}
+.collectionsTitle{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: 700;
+
+}
+
+.collectionForm{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  max-width: 800px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 body {
