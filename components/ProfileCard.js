@@ -21,43 +21,47 @@ function ProfileCard({
   };
 
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Body>
-        <Col xs={6} md={4}>
-          <Image src={user.photoURL} roundedCircle />
-        </Col>
-        <Card.Title>
-          {userObj.userName}&apos;s Profile
-        </Card.Title>
-        <div>
-          <p>
-            Email: {userObj.emailAddress}
-          </p>
-          <p>
-            Bio: {userObj.bio}
-          </p>
-          <p>
-            City: {userObj.city}
-          </p>
-          <p>
-            State: {userObj.state}
-          </p>
-        </div>
-        <div>
-          <p>
-            Number of Posts: {usersPosts.length}
-          </p>
-          <p>
-            Number of Collections: {usersCollections.length}
-          </p>
-          <p>
-            Number of Comments: {usersComments.length}
-          </p>
-        </div>
-        <Button onClick={pushToMyPosts}>Go to your Posts</Button>
-        <Button onClick={pushToMyCollections}>Go to your Collections</Button>
-      </Card.Body>
-    </Card>
+    <div className="profileCard">
+      <Card style={{ width: '18rem' }}>
+        <Card.Body>
+          <Col xs={6} md={4}>
+            <Image src={user.photoURL} roundedCircle />
+          </Col>
+          <h3 className="profileCardTitle">
+            {userObj.userName}&apos;s Profile
+          </h3>
+          <div className="profileUserItems">
+            <p>
+              Email: {userObj.emailAddress}
+            </p>
+            <p>
+              Bio: {userObj.bio}
+            </p>
+            <p>
+              City: {userObj.city}
+            </p>
+            <p>
+              State: {userObj.state}
+            </p>
+          </div>
+          <div className="profileUserStats">
+            <p>
+              Number of Posts: {usersPosts.length}
+            </p>
+            <p>
+              Number of Collections: {usersCollections.length}
+            </p>
+            <p>
+              Number of Comments: {usersComments.length}
+            </p>
+          </div>
+          <div className="profileButtons">
+            <Button variant="outline-secondary" className="singleProfileButton" onClick={pushToMyPosts}>Go to your Posts</Button>
+            <Button variant="outline-secondary" onClick={pushToMyCollections}>Go to your Collections</Button>
+          </div>
+        </Card.Body>
+      </Card>
+    </div>
   );
 }
 

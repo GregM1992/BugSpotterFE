@@ -40,7 +40,7 @@ export default function PostDetails() {
       <div className="descriptionDiv">
         {post.content}
       </div>
-      <Map posts={[post]} />
+      <Map posts={[post]} center={{ lat: post.latitude, lng: post.longitude }} />
       {comments.map((comment) => (
         <CommentCard key={comment.id} commentObj={comment} onUpdate={getComments} />
       ))}
