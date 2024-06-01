@@ -44,7 +44,7 @@ function CollectionForm({ collectionObj }) {
   };
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="ControlInput1">
         <Form.Label>Collection Name</Form.Label>
         <Form.Control
@@ -53,9 +53,10 @@ function CollectionForm({ collectionObj }) {
           name="name"
           onChange={handleInputChange}
           value={formInput.name}
+          required
         />
       </Form.Group>
-      <Button variant="outline-secondary" type="submit" onClick={handleSubmit}>
+      <Button variant="outline-secondary" type="submit">
         Create Collection
       </Button>
     </Form>

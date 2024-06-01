@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import { PropTypes } from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import { useRouter } from 'next/router';
+import { Container } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
 import { createPost, updatePost } from '../../api/postData';
 import { getAllTags, addTagToPost } from '../../api/tagData';
@@ -88,14 +89,15 @@ function PostForm({ postObj }) {
   }, [postObj.id]);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     if (postObj.id) {
+      e.preventDefault();
       updatePost(postObj.id, formInput)
         .then(() => {
           setFormInput(initialState);
           router.push(`/post/${postObj.id}`);
         });
     } else {
+      e.preventDefault();
       createPost(formInput)
         .then((response) => {
           const tagPromises = formInput.tags.map((tagId) => addTagToPost(response.id, tagId));
@@ -109,7 +111,7 @@ function PostForm({ postObj }) {
   };
 
   return (
-    <Form>
+    <Form className="postForm" onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="ControlInput1">
         <Form.Label>Which collection are you adding to?</Form.Label>
         <Form.Select
@@ -117,6 +119,7 @@ function PostForm({ postObj }) {
           name="collectionId"
           onChange={handleInputChange}
           value={formInput.collectionId}
+          required
         >
           <option value="" label="Select a Collection" />
           {collections.map((collection) => (
@@ -124,13 +127,14 @@ function PostForm({ postObj }) {
               key={collection.id}
               value={collection.id}
               label={collection.name}
+              required
             />
           ))}
         </Form.Select>
       </Form.Group>
       <Form.Group controlId="formFile" className="mb-3">
         <Form.Label>Upload an image</Form.Label>
-        <Form.Control type="file" onChange={handleFileUpload} />
+        <Form.Control type="file" onChange={handleFileUpload} required />
       </Form.Group>
       {tags.map((tag) => (
         <Form.Check
@@ -149,6 +153,7 @@ function PostForm({ postObj }) {
           name="description"
           onChange={handleInputChange}
           value={formInput.description}
+          required
         />
       </Form.Group>
       <Form.Label>Favorite?</Form.Label>
@@ -166,11 +171,11 @@ function PostForm({ postObj }) {
           }));
         }}
       />
-      <div>
+      <Container className="postFormMapContainer">
         <Map onLocationSelect={handleLocationSelect} />
-      </div>
+      </Container>
       <p>Selected Location: Latitude {formInput.latitude}, Longitude {formInput.longitude}</p>
-      <Button variant="primary" type="submit" onClick={handleSubmit}>
+      <Button variant="outline-secondary" type="submit">
         {postObj.id ? 'Update Post' : 'Create Post'}
       </Button>
     </Form>
