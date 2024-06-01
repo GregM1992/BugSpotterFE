@@ -31,7 +31,7 @@ function Home() {
     <div
       className="text-center flex-column justify-content-center landingPageContainer"
       style={{
-        height: '90vh',
+        height: '75vh',
         padding: '30px',
         maxWidth: '700px',
         margin: '0 auto',

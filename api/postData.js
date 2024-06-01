@@ -97,7 +97,19 @@ const getSingleUsersPosts = (userId) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getPostsByTagId = (tagId) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/posts/tags/${tagId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
+
 export {
   getPosts, getSinglePost, createPost, updatePost, deletePost, getSinglePostByPostId,
-  getPostsByCollectionId, getSingleUsersPosts,
+  getPostsByCollectionId, getSingleUsersPosts, getPostsByTagId,
 };

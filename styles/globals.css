@@ -45,7 +45,7 @@ margin: none;
 .map-container{
   height: 400px;
   width: 100%;
-  border-radius: 25px;
+  border-radius: 5px;
   box-shadow: 1px 2px 5px 0px #000000;
   margin-bottom: 30px;
 }
@@ -57,7 +57,7 @@ margin: none;
 }
 .landingPageHeader{
   margin-top: none;
-  margin-bottom: 20px;
+  margin-bottom: 7px;
 }
 .logOutText{
   margin-bottom: 20px;
@@ -120,17 +120,20 @@ margin: none;
   margin-bottom: 20px;
   border: none;
   box-shadow: #173309 2px 3px 5px 0px;
+  height: fit-content;
+  padding: auto;
 }
 .postDescription{
- background-color: #6B895B !important;
- padding: 5px;
- text-align: center;
- color: #FAFFF1;
- border-radius: 7px;
- max-width: 260px;
- min-width: 260px;
- margin-bottom: auto;
-}
+  background-color: #6B895B !important;
+  padding: 5px;
+  color: #FAFFF1;
+  border-radius: 7px;
+  max-width: 260px;
+  min-width: 260px;
+  text-align: center;
+  margin-bottom: 5px;
+  margin-top: 5px;
+ }
 .tag{
   background-color: #173309;
   color: #FAFFF1;
@@ -149,7 +152,7 @@ margin: none;
   flex-direction: row;
   justify-content: center;
   margin-top: 2px;
-  margin-bottom: 5px;
+  margin-bottom: 7px;
   min-width: 79px;
   font-weight: 600;
 }
@@ -170,6 +173,7 @@ margin: none;
   margin-bottom: 20px;
   margin : auto;
   max-width: 800px;
+  align-items: space-between;
 }
 .singlePostCard{
   align-items: start;
@@ -177,7 +181,11 @@ margin: none;
 .postTags{
   display: flex;
   flex-direction: row;
-  margin-top: 15px;
+  margin-top: 3px;
+}
+.postTagTitle{
+  margin-top: 10px;
+  margin-bottom: 0px;
 }
 .individualTagOnPost{
   background-color: #173309;
@@ -268,6 +276,75 @@ margin: none;
   text-align: center;
 }
 
+.postForm{
+  margin: auto;
+  max-width: 1000px;
+  font-weight: 700;
+}
+.postFormTitle{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: 700;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.commentCardBody{
+  width: 800px;
+  margin-bottom: 30px;
+}
+.postCardWithMapContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 800px;
+  max-height: 335px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.postDetailsMap{
+  padding-top: 19px;
+  height: 330px;
+  width: 450px;
+  border-radius: 5px;
+}
+.postImage{
+  height: 231px;
+  width: 288px;
+}
+.postFormMapContainer{
+  height: 400px;
+  width: 100%;
+  margin-bottom: 10px;
+  margin-left: none;
+  margin-right: none;
+  padding: none;
+}
+.tagFilterButtonsDiv{
+  font-weight: bolder;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+.filterButtons{
+  font-weight: 600;
+  box-shadow: #173309 1px 2px 5px 0px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.removeFilterDiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.filterTitle{
+ display: flex;
+justify-content: center;
+}
 body {
   background-color: #FAFFF1;
 }

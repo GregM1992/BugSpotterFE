@@ -4,9 +4,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { deletePost } from '../api/postData';
+import { useAuth } from '../utils/context/authContext';
 
 function PostCard({ postObj, onUpdate, location }) {
   const router = useRouter();
+  const { user } = useAuth();
   const deleteThisPost = () => {
     if (window.confirm('Delete this post?')) {
       deletePost(postObj.id).then(() => {
@@ -21,7 +23,7 @@ function PostCard({ postObj, onUpdate, location }) {
 
   return (
     <Card className="postCardBody" style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={postObj.image} />
+      <Card.Img className="postImage" src={postObj.image} />
       <Card.Body>
         <Card.Title />
         <Card.Text className="postDescription">
@@ -49,7 +51,7 @@ function PostCard({ postObj, onUpdate, location }) {
       {location !== 'details' ? (
         <Button className="postCardButtons" variant="outline-secondary" onClick={viewDetails}>View</Button>
       ) : <><div /></>}
-      {location !== 'details' ? (
+      {location !== 'details' && postObj.userId === user.id ? (
         <Button className="postCardButtons" variant="outline-secondary" onClick={deleteThisPost}>Delete</Button>
       ) : <><div /></>}
     </Card>

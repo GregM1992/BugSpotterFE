@@ -1,6 +1,7 @@
 import Card from 'react-bootstrap/Card';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'react-bootstrap';
 import { deleteComment } from '../api/commentData';
 import { useAuth } from '../utils/context/authContext';
 
@@ -15,8 +16,8 @@ function CommentCard({ commentObj, onUpdate }) {
   };
 
   return (
-    <Card>
-      <Card.Header>{commentObj.user.userName}</Card.Header>
+    <Card className="commentCardBody">
+      <Card.Header>{commentObj.user.userName} commented:</Card.Header>
       <Card.Body>
         <blockquote className="blockquote mb-0">
           <p>
@@ -28,7 +29,7 @@ function CommentCard({ commentObj, onUpdate }) {
       </Card.Body>
       {commentObj.userId === user.id ? (
         <Card.Footer>
-          <button type="button" className="btn btn-danger" onClick={deleteThisComment}>Delete</button>
+          <Button type="button" variant="outline-danger" onClick={deleteThisComment}>Delete</Button>
         </Card.Footer>
       ) : null}
     </Card>

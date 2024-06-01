@@ -9,7 +9,7 @@ const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
 const containerStyle = {
   width: '100%',
-  height: '400px',
+  height: '100%',
 };
 
 const center = {
@@ -64,6 +64,7 @@ function Map({ onLocationSelect, posts }) {
         <Marker
           position={selectedLocation}
           draggable
+          onDragEnd={handleMapClick}
         />
       )}
       {posts && posts.map((post) => (
