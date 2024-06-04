@@ -9,6 +9,7 @@ import TagCard from '../../components/TagCard';
 import Map from '../../components/Map';
 import CommentModalForm from '../../components/forms/CommentModalForm';
 import { getSingleUser } from '../../api/userData';
+import SuggestionModal from '../../components/forms/SuggestionModal';
 
 export default function PostDetails() {
   const [post, setPost] = useState({ tags: [] });
@@ -71,6 +72,7 @@ export default function PostDetails() {
         <CommentCard key={comment.id} commentObj={comment} onUpdate={getComments} />
       ))}
       <CommentModalForm onUpdate={getComments} />
+      <SuggestionModal />
     </div>
   );
 }
