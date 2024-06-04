@@ -8,7 +8,7 @@ import { createComment, updateComment } from '../../api/commentData';
 import { useAuth } from '../../utils/context/authContext';
 
 const initialState = {
-  content: ' ',
+  content: '',
 };
 
 function CommentModalForm({ commentObj, onUpdate }) {
@@ -68,11 +68,10 @@ function CommentModalForm({ commentObj, onUpdate }) {
         <Modal.Body>
           <Form>
             <Form.Group md="4" controlId="validationCustom02">
-              <Form.Label className="text">Comment</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
-                placeholder="Enter your comment"
+                placeholder="What do you want to say?"
                 name="content"
                 onChange={handleChange}
                 value={formInput.content}
@@ -81,10 +80,10 @@ function CommentModalForm({ commentObj, onUpdate }) {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="outline-secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleSubmit}>
+          <Button variant="outline-success" onClick={handleSubmit}>
             Save Comment
           </Button>
         </Modal.Footer>
