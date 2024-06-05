@@ -10,11 +10,14 @@ import Map from '../../components/Map';
 import CommentModalForm from '../../components/forms/CommentModalForm';
 import { getSingleUser } from '../../api/userData';
 import SuggestionModal from '../../components/forms/SuggestionModal';
+import { getSuggestionsByPostId } from '../../api/suggestionData';
+import SuggestionCard from '../../components/SuggestionCard';
 
 export default function PostDetails() {
   const [post, setPost] = useState({ tags: [] });
-  const [comments, setComments] = useState([]);
-  const [user, setUser] = useState({});
+  const [comments, setComments] = useState([{ user: {} }]);
+  const [suggestions, setSuggestions] = useState([{ user: {} }]);
+  const [userInfo, setUserInfo] = useState({});
   const router = useRouter();
   const { id } = router.query;
 
@@ -30,9 +33,16 @@ export default function PostDetails() {
   };
   const getUserInfo = () => {
     getSingleUser(post.userId).then((data) => {
-      setUser(data);
+      setUserInfo(data);
     });
   };
+  const getPostSuggestions = () => {
+    getSuggestionsByPostId(id).then((data) => {
+      setSuggestions(data);
+      console.warn('suggestions', data);
+    });
+  };
+
   const handleLocationRender = () => {
     const lat = post.latitude;
     const lng = post.longitude;
@@ -47,6 +57,7 @@ export default function PostDetails() {
     getPost();
     getComments();
     getUserInfo();
+    getPostSuggestions();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [post.id]);
 
@@ -58,7 +69,7 @@ export default function PostDetails() {
           <TagCard className="individualTagOnPost" key={tag.id} tagObj={tag} />
         ))}
       </div>
-      <Button variant="outline-secondary" onClick={pushToUsersPosts}>Go to {user.userName}&apos;s Post</Button>
+      <Button variant="outline-secondary" onClick={pushToUsersPosts}>Go to {userInfo.userName}&apos;s Post</Button>
       <Container className="postCardWithMapContainer">
         <PostCard className="singlePostCard" key={post.id} postObj={post} onUpdate={getPost} location="details" />
         <div className="descriptionDiv">
@@ -71,8 +82,11 @@ export default function PostDetails() {
       {comments.map((comment) => (
         <CommentCard key={comment.id} commentObj={comment} onUpdate={getComments} />
       ))}
+      {suggestions.map((suggestion) => (
+        <SuggestionCard key={suggestion.id} suggestionObj={suggestion} onUpdate={getPostSuggestions} />
+      ))}
       <CommentModalForm onUpdate={getComments} />
-      <SuggestionModal />
+      <SuggestionModal onUpdate={getPostSuggestions} />
     </div>
   );
 }

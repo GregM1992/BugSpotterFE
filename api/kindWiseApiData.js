@@ -5,6 +5,7 @@ const searchInsects = (searchInput) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/api/v1/kb/insect/name_search?q=${searchInput}`, {
     method: 'GET',
     headers: {
+      'api-key': apiKey,
       'Content-Type': 'application/json',
     },
   })
@@ -17,6 +18,7 @@ const getInsectDetails = (insectId) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/api/v1/kb/insect/:${insectId}?details=common_names,url,description,image`, {
     method: 'GET',
     headers: {
+      'api-key': apiKey,
       'Content-Type': 'application/json',
     },
   })
