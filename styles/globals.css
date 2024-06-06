@@ -28,6 +28,11 @@ a {
 .userName{
   font-weight: bolder;
 }
+.copy-btn{
+  max-width: 200px;
+  margin-right: auto;
+  margin-left: auto;
+}
 
 .navBarItems{
 margin: none;

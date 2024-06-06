@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { Form, Image } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { getSinglePostByPostId } from '../../api/postData';
-import { createIdentification } from '../../api/kindWiseApiData';
+import { createIdentification, getInsectDetails, searchInsects } from '../../api/kindWiseApiData';
 import { createSuggestion } from '../../api/suggestionData';
 import { useAuth } from '../../utils/context/authContext';
 
@@ -19,8 +19,13 @@ const initialState = {
 function SuggestionModal({ onUpdate }) {
   const router = useRouter();
   const [suggestionOptions, setSuggestionOptions] = useState({ result: { classification: { suggestions: [] } } });
+  const [suggestionImage, setSuggestionImage] = useState('');
+  const [, setInsectAccessToken] = useState('');
+  const [, setInsect] = useState({
+    common_names: [], url: '', description: { value: '' }, image: { value: '' },
+  });
 
-  const [formInput, setFormInput] = useState({});
+  const [formInput, setFormInput] = useState(initialState);
   const { id } = router.query;
   const [show, setShow] = useState(false);
   const { user } = useAuth();
@@ -41,16 +46,45 @@ function SuggestionModal({ onUpdate }) {
     });
   };
 
+  const getInsect = async () => {
+    try {
+      const data = await searchInsects(formInput.suggestionContent);
+      if (data.entities && data.entities.length > 0) {
+        const accessToken = data.entities[0].access_token;
+        setInsectAccessToken(accessToken);
+
+        const insectData = await getInsectDetails(accessToken);
+        setInsect(insectData);
+        setSuggestionImage(insectData.image.value);
+      } else {
+        console.warn('No entities found for the provided suggestion content.');
+      }
+    } catch (error) {
+      console.error('Error fetching insect data:', error);
+    }
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormInput((prevState) => ({
-      ...prevState,
-      [name]: value,
-      userId: user.id,
-      postId: id,
-      suggestionId: suggestionOptions.result.classification.suggestions.find((suggestion) => suggestion.name === value).id,
-    }));
+    const selectedSuggestion = suggestionOptions.result.classification.suggestions.find((suggestion) => suggestion.name === value);
+
+    if (selectedSuggestion) {
+      setFormInput((prevState) => ({
+        ...prevState,
+        [name]: value,
+        userId: user.id,
+        postId: id,
+        suggestionId: selectedSuggestion.id,
+      }));
+    }
   };
+
+  useEffect(() => {
+    if (formInput.suggestionContent) {
+      getInsect();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formInput.suggestionContent]);
 
   return (
     <>
@@ -83,6 +117,9 @@ function SuggestionModal({ onUpdate }) {
                   />
                 ))}
               </Form.Select>
+              {suggestionImage && (
+                <Image className="suggestionImage" src={suggestionImage} alt="suggestionImage" fluid />
+              )}
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -100,17 +137,7 @@ function SuggestionModal({ onUpdate }) {
 }
 
 SuggestionModal.propTypes = {
-  suggestionObj: PropTypes.shape({
-    id: PropTypes.number,
-    suggestionContent: PropTypes.string,
-    userId: PropTypes.number,
-    postId: PropTypes.number,
-  }),
   onUpdate: PropTypes.func.isRequired,
-};
-
-SuggestionModal.defaultProps = {
-  suggestionObj: initialState,
 };
 
 export default SuggestionModal;
