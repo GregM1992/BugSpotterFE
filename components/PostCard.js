@@ -1,5 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Tippy from '@tippyjs/react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
@@ -26,9 +27,17 @@ function PostCard({ postObj, onUpdate, location }) {
       <Card.Img className="postImage" src={postObj.image} />
       <Card.Body>
         <Card.Title />
-        <Card.Text className="postDescription">
-          {postObj.description}
-        </Card.Text>
+        {location === 'details' ? (
+          <Card.Text className="postDetailsDescription">
+            <Tippy className="toolTip" content={postObj.description}>
+              <span>{postObj.description}</span>
+            </Tippy>
+          </Card.Text>
+        ) : (
+          <Card.Text className="postDescription">
+            {postObj.description}
+          </Card.Text>
+        )}
         <div className="tagContainer">
           {location === 'feed' ? postObj.tags.map((tag) => (
             <div

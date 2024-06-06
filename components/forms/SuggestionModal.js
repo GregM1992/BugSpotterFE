@@ -13,9 +13,10 @@ const initialState = {
   userId: 0,
   suggestionContent: '',
   postId: 0,
+  suggestionId: 0,
 };
 
-function SuggestionModal() {
+function SuggestionModal({ onUpdate }) {
   const router = useRouter();
   const [suggestionOptions, setSuggestionOptions] = useState({ result: { classification: { suggestions: [] } } });
 
@@ -24,10 +25,7 @@ function SuggestionModal() {
   const [show, setShow] = useState(false);
   const { user } = useAuth();
 
-  const handleClose = () => {
-    createSuggestion(formInput).then(() => router.push(`/post/${id}`));
-    setShow(false);
-  };
+  const handleClose = () => setShow(false);
 
   const handleShow = async () => {
     const data = await getSinglePostByPostId(id);
@@ -38,8 +36,9 @@ function SuggestionModal() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createSuggestion(formInput).then(() => router.push(`/post/${id}`));
-    setShow(false);
+    createSuggestion(formInput).then(() => router.push(`/post/${id}`)).then(handleClose).then(() => {
+      onUpdate();
+    });
   };
 
   const handleInputChange = (e) => {
@@ -49,12 +48,13 @@ function SuggestionModal() {
       [name]: value,
       userId: user.id,
       postId: id,
+      suggestionId: suggestionOptions.result.classification.suggestions.find((suggestion) => suggestion.name === value).id,
     }));
   };
 
   return (
     <>
-      <Button variant="outline-dark" onClick={handleShow}>
+      <Button className="suggestionModalButton" variant="outline-dark" onClick={handleShow}>
         Add Suggestion
       </Button>
 
@@ -77,7 +77,7 @@ function SuggestionModal() {
                 {suggestionOptions.result.classification.suggestions.map((suggestion) => (
                   <option
                     key={suggestion.id}
-                    value={suggestion.id}
+                    value={suggestion.name}
                     label={suggestion.name}
                     required
                   />
@@ -106,6 +106,7 @@ SuggestionModal.propTypes = {
     userId: PropTypes.number,
     postId: PropTypes.number,
   }),
+  onUpdate: PropTypes.func.isRequired,
 };
 
 SuggestionModal.defaultProps = {

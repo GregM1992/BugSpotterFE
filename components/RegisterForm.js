@@ -28,9 +28,8 @@ function RegisterForm() {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>UserName</Form.Label>
+    <Form className="registerForm" onSubmit={handleSubmit}>
+      <Form.Group className="mb-3 registerInputs topInput" controlId="formBasicEmail">
         <Form.Control
           as="textarea"
           name="userName"
@@ -39,8 +38,7 @@ function RegisterForm() {
           onChange={handleChange}
         />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Bio</Form.Label>
+      <Form.Group className="mb-3 registerInputs" controlId="formBasicEmail">
         <Form.Control
           as="textarea"
           name="bio"
@@ -49,8 +47,7 @@ function RegisterForm() {
           onChange={handleChange}
         />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>City</Form.Label>
+      <Form.Group className="mb-3 registerInputs" controlId="formBasicEmail">
         <Form.Control
           as="textarea"
           name="city"
@@ -59,8 +56,7 @@ function RegisterForm() {
           onChange={handleChange}
         />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>State</Form.Label>
+      <Form.Group className="mb-3 registerInputs" controlId="formBasicEmail">
         <Form.Control
           as="textarea"
           name="state"
@@ -69,7 +65,7 @@ function RegisterForm() {
           onChange={handleChange}
         />
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button variant="outline-success" className="registerButton" type="submit">
         Submit
       </Button>
     </Form>
