@@ -54,7 +54,7 @@ function SuggestionModal({ onUpdate }) {
 
   return (
     <>
-      <Button variant="outline-dark" onClick={handleShow}>
+      <Button className="suggestionModalButton" variant="outline-dark" onClick={handleShow}>
         Add Suggestion
       </Button>
 

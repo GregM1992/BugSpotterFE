@@ -4,22 +4,38 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 function SuggestionInfoCard({ suggestionObj }) {
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Body>
-        <Card.Title>{suggestionObj.name}</Card.Title>
-        <Card.Text>
-          {suggestionObj.description.value}
-        </Card.Text>
-      </Card.Body>
-      <ListGroup className="list-group-flush">
-        {suggestionObj.common_names.map((name) => (
-          <ListGroup.Item key={name}>{name}</ListGroup.Item>
-        ))}
-      </ListGroup>
-      <Card.Body>
-        <Card.Link href={suggestionObj.url}>More Info</Card.Link>
-      </Card.Body>
-    </Card>
+    <div className="detailsDiv">
+      <Card className="suggestionDetailsCard" style={{ width: '18rem' }}>
+        <Card.Body>
+          <Card.Title>{suggestionObj.name}</Card.Title>
+          {suggestionObj.image && suggestionObj.image.value && (
+          <Card.Img variant="top" src={suggestionObj.image.value} />
+          )}
+          {suggestionObj.description && suggestionObj.description.value && (
+          <Card.Text>
+            {suggestionObj.description.value}
+          </Card.Text>
+          )}
+        </Card.Body>
+        <Card.Body>
+          <Card.Title>Common Names</Card.Title>
+          <ListGroup className="list-group-flush">
+            {suggestionObj.common_names && suggestionObj.common_names.length > 0 ? (
+              suggestionObj.common_names.map((name) => (
+                <ListGroup.Item key={name}>{name}</ListGroup.Item>
+              ))
+            ) : (
+              <ListGroup.Item>No common names found</ListGroup.Item>
+            )}
+          </ListGroup>
+        </Card.Body>
+        <Card.Body>
+          {suggestionObj.url && (
+          <Card.Link className="infoButton" href={suggestionObj.url} target="_blank">More Info</Card.Link>
+          )}
+        </Card.Body>
+      </Card>
+    </div>
   );
 }
 
@@ -34,7 +50,7 @@ SuggestionInfoCard.propTypes = {
       value: PropTypes.string,
     }),
     name: PropTypes.string,
-  }),
-}.isRequired;
+  }).isRequired,
+};
 
 export default SuggestionInfoCard;

@@ -134,7 +134,30 @@ margin: none;
   margin-bottom: 5px;
   margin-top: 5px;
  }
+ .postDetailsDescription{
+  display: -webkit-box;
+  background-color: #6B895B !important;
+  padding: 5px;
+  color: #FAFFF1;
+  border-radius: 7px;
+  max-width: 260px;
+  min-width: 260px;
+  -webkit-line-clamp: 1 !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  text-align: center;
+  margin-bottom: 5px;
+  margin-top: 5px;
+ }
 .tag{
+  background-color: #173309;
+  color: #FAFFF1;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 7px;
+}
+.toolTip{
   background-color: #173309;
   color: #FAFFF1;
   margin: 5px;
@@ -292,6 +315,12 @@ margin: none;
 .commentCardBody{
   width: 800px;
   margin-bottom: 30px;
+  box-shadow: #173309 2px 3px 5px 0px;
+}
+.suggestionCardBody{
+  width: 800px;
+  margin-bottom: 30px;
+  box-shadow: #173309 2px 3px 5px 0px;
 }
 .postCardWithMapContainer{
   display: flex;
@@ -300,6 +329,21 @@ margin: none;
   width: 800px;
   max-height: 335px;
   margin-top: 20px;
+  margin-bottom: 20px;
+}
+.suggestionButtonDiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.nonUserSuggestionButton{
+  max-width: fit-content;
+}
+.suggestionButton{
+  margin-right: 20px;
+}
+.suggestionModalButton{
+  margin-top: 10px;
   margin-bottom: 20px;
 }
 .postDetailsMap{
@@ -345,6 +389,60 @@ margin: none;
  display: flex;
 justify-content: center;
 }
+.registerInputs{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  margin-bottom: 40px !important;
+  max-width: 800px;
+}
+.topInput{
+  margin-top: 40px;
+}
+.registerButton{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  width: 100px;
+}
+.suggestionDetailsCard{
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: none;
+  box-shadow: #173309 2px 3px 5px 0px;
+  height: fit-content;
+  padding: auto;
+  min-width: 400px;
+
+}
+
+.detailsDiv{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin : auto;
+  max-width: 800px;
+  align-items: space-between;
+}
+.infoButton{
+  font-weight: 600;
+  border: #000000 1px solid;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
 body {
   background-color: #FAFFF1;
 }

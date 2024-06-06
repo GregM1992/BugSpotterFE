@@ -34,11 +34,15 @@ function SuggestionCard({ suggestionObj, onUpdate }) {
         </blockquote>
       </Card.Body>
       {suggestionObj.userId === user.id ? (
-        <Card.Footer>
-          <Button type="button" variant="outline-danger" onClick={deleteThisSuggestion}>Delete</Button>
-          <Button type="button" variant="outline-secondary" onClick={pushToSuggestionDetails}>Suggestion Info</Button>
+        <Card.Footer className="suggestionButtonDiv">
+          <Button className="suggestionButton" type="button" variant="outline-danger" onClick={deleteThisSuggestion}>Delete</Button>
+          <Button className="suggestionButton" type="button" variant="outline-secondary" onClick={pushToSuggestionDetails}>Suggestion Info</Button>
         </Card.Footer>
-      ) : null}
+      ) : (
+        <Card.Footer className="suggestionButtonDiv">
+          <Button className="nonUserSuggestionButton" type="button" variant="outline-secondary" onClick={pushToSuggestionDetails}>Suggestion Info</Button>
+        </Card.Footer>
+      )}
     </Card>
   );
 }

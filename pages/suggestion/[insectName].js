@@ -4,20 +4,20 @@ import SuggestionInfoCard from '../../components/SuggestionInfoCard';
 import { getInsectDetails, searchInsects } from '../../api/kindWiseApiData';
 
 export default function SuggestionDetails() {
-  const [insectAccessToken, setInsectAccessToken] = useState({ entities: [] });
+  const [, setInsectAccessToken] = useState('');
   const [insect, setInsect] = useState({
-    common_names: [], url: '', description: '', image: '',
+    common_names: [], url: '', description: { value: '' }, image: { value: '' },
   });
   const router = useRouter();
-  const { id } = router.query;
+  const { insectName } = router.query;
 
   const getInsect = async () => {
     try {
-      const data = await searchInsects(id);
+      const data = await searchInsects(insectName);
       const accessToken = data.entities[0].access_token;
       setInsectAccessToken(accessToken);
 
-      const insectData = await getInsectDetails(insectAccessToken);
+      const insectData = await getInsectDetails(accessToken);
       setInsect(insectData);
     } catch (error) {
       console.error('Error fetching insect data:', error);
@@ -25,9 +25,11 @@ export default function SuggestionDetails() {
   };
 
   useEffect(() => {
-    getInsect();
+    if (insectName) {
+      getInsect();
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [insectName]);
 
   return (
     <SuggestionInfoCard suggestionObj={insect} />
