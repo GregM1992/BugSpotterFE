@@ -1,44 +1,124 @@
-# React/Next.js Django Auth Template
+# BugSpotter
+BugSpotter is an innovative web application designed to help users identify insects using AI technology and community expertise. Users can upload photos of insects they encounter, and BugSpotter will provide accurate identifications and additional information about the insects.
 
-## Topics
-- [Get Started](#getting-started)
-- [Starting the Project](#starting-the-project)
-___
-## Getting Started
-### Use Template
-#### 1. To get started, click the GREEN "Use this Template" button at the top of the repo
-<img width="915" alt="Screen Shot 2022-07-06 at 12 54 01 PM" src="https://user-images.githubusercontent.com/29741570/177612998-4aac9237-5a1e-4f13-8ae0-468587521564.png">
+## Table of Contents:
+- Features
+- Live Demo
+- Technologies Used
+- Installation
+- Usage
+- API Integration
+- Contact
 
-#### 2. Make sure YOUR github account is selected in the dropdown and name your project
-<img width="763" alt="Screen Shot 2022-07-06 at 12 54 48 PM" src="https://user-images.githubusercontent.com/29741570/177613126-dd38f678-7553-4f27-8a4a-75680f14d71e.png">
+### Features
+- Insect Identification: Upload photos to get AI-based insect identification.
+- Community Support: Engage with a community of bug enthusiasts for additional identification help.
+- Detailed Information: Access detailed information about identified insects.
+- User-Friendly Interface: A responsive and intuitive interface for easy navigation and use.
+### Live Demo:
+Check out the live demo of BugSpotter [here](https://www.loom.com/share/1a6679f958dc4f7f9d142bef583ea15b?sid=d436ed3e-94eb-4461-a914-86e34a9530b0).
 
-#### 3. Clone your new repo to your local machine
-#### 4. Go to the **NEXT** section
+### Technologies Used
+#### Front-End:
+- React
+- Bootstrap
+- Node.js
+- GoogleMaps API
+- Tippy.js
+- CSS
+- Next.js
+- Axios
+- Firebase
+#### Back-End:
+- https://github.com/GregM1992/BugSpotterBE
+- AspNetCore
+- EntityFramework
+- .NET
+- PostgreSQL
+- PgAdmin
 
-## Starting the Project
-1. Create a Firebase project and set up authentication. Use [these videos](https://vimeo.com/showcase/codetracker-firebase) as a refresher if needed.
-1. Create a `.env` file at the root of the project
-1. Copy/Paste the contents of the `.env.sample` file to your newly created `.env` file.
-1. Copy over all of your Firebase values into the `.env` file.
-1. Open the `package.json` file and change the `name` property to the name of your application, and `author` to  your name.
-1. From your command line, be in the root directory and run `npm install` OR `npm i` for short.
-1. Next, run `npm run prepare`. This command sets up husky to track eslint errors on commit that will make your deploy fail on Netlify.
-1. To start your application, run `npm run dev`. THIS IS THE COMMAND YOU WILL USE TO RUN YOUR DEVELOPMENT SERVER FROM NOW ON.
-1. Open [http://localhost:3000](http://localhost:3000) with your browser.
+#### External APIs:
+- [Kindwise.Insect-Id](https://www.kindwise.com/insect-id)
+- [Google Maps API](https://developers.google.com/maps)
 
-### If you see this, you are set to go!
-<img width="450" alt="Screen Shot 2022-07-06 at 1 07 27 PM" src="https://user-images.githubusercontent.com/29741570/177615077-9b6a75bc-0260-4d29-bb88-bd95a3140687.png">
+#### Additional Libraries:
+- React-Router
+- PropTypes
+- React-Bootstrap
+- Firebase Auth
 
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-**NOTES:** 
-- If you see the following error, you did not follow all the setup steps correctly and failed to add your Firebase creds. Go back and do that NOW.
+## Installation
+To run BugSpotter locally, follow these steps:
 
-<img width="1043" alt="Screen Shot 2022-07-06 at 11 18 45 AM" src="https://user-images.githubusercontent.com/29741570/177612501-c2628f18-4bbd-4de9-aae6-27ffba1172d6.png">
+#### Clone the Repository:
+
+```
+git clone https://github.com/GregM1992/BugSpotterFE
+cd BugSpotter
+```
+Install Dependencies:
+Make sure you have Node.js installed. Then, run:
+```
+npm run
+npm install
+npm i -S @react-google-maps/api
+npm i tippy.js
+```
+
+
+#### Set Up Environment Variables:
+Create a .env file in the root directory and add the necessary environment variables. For example:
+
+```
+REACT_APP_API_KEY=your-api-key
+REACT_APP_API_URL=https://api.example.com
+NEXT_PUBLIC_FIREBASE_API_KEY="example"
+NEXT_PUBLIC_DATABASE_URL="localHost"
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY="example"
+NEXT_PUBLIC_INSECT_API_KEY="example"
+```
+You can get a googleMaps api key here : https://developers.google.com/maps/documentation/javascript/get-api-key
+You can sign up for the kindwise.id api key here: https://www.kindwise.com/insect-id
+
+#### Start the Development Server:
+
+```
+npm run dev
+```
+
+This will start the app on http://localhost:3000.
+
+### Usage
+Open BugSpotter:
+Navigate to http://localhost:3000 in your web browser.
+
+#### Upload a Photo:
+Click on the upload button and select a photo of an insect.
+
+#### View Identification:
+Once the photo is uploaded, BugSpotter will provide an identification along with additional information about the insect.
+
+#### Explore Insect Details:
+Click on identified insects to view detailed descriptions and additional resources.
+
+#### API Integration
+BugSpotter integrates with external APIs for AI-based insect identification and fetching insect details. Ensure you have valid API keys and URLs configured in your .env file.
+
+#### Identification API: Provides AI-based insect identification from uploaded photos.
+Insect Information API: Fetches detailed information about the identified insects.
+
+
+
+
+### Contact
+For any questions or suggestions, feel free to reach out:
+
+- Name: Greg Markus
+- Email: Gregorymarkus92@gmail.com
+- GitHub: https://github.com/GregM1992
+- LinkedIn: https://www.linkedin.com/in/gregory-markus/
+
         
-## Learn More about Next.js
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
